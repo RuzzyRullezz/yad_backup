@@ -76,13 +76,13 @@ def existed_path(argument: str) -> str:
 
 def backup(arguments):
     logger = logging.getLogger(__name__)
-    client = yadisk.YaDisk(id=arguments.id, secret=arguments.password, token=arguments.token)
     backup_folder_name = os.path.basename(arguments.source)
     output_filename = os.path.join('/tmp', backup_folder_name)
-    if not client.exists(arguments.dest):
-        logger.info('Create directory %s' % arguments.dest)
-        client.mkdir(arguments.dest)
     try:
+        client = yadisk.YaDisk(id=arguments.id, secret=arguments.password, token=arguments.token)
+        if not client.exists(arguments.dest):
+            logger.info('Create directory %s' % arguments.dest)
+            client.mkdir(arguments.dest)
         shutil.make_archive(output_filename, archive_type, arguments.source)
         output_filename = '.'.join([output_filename, archive_type])
         if arguments.count:
