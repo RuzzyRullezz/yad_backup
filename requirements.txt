@@ -1,0 +1,2 @@
+yadisk==1.2.11
+telegram_log==1.0.10
