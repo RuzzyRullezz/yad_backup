@@ -122,7 +122,8 @@ def backup(arguments):
         logger.exception('ya.disk exception')
         raise
     finally:
-        os.remove(output_filename)
+        if os.path.exists(output_filename):
+            os.remove(output_filename)
 
 
 if __name__ == '__main__':
