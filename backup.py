@@ -76,7 +76,7 @@ def existed_path(argument: str) -> str:
 
 def backup(arguments):
     logger = logging.getLogger(__name__)
-    backup_folder_name = os.path.basename(arguments.source)
+    backup_folder_name = os.path.basename(os.path.normpath(arguments.source))
     output_filename = os.path.join('/tmp', backup_folder_name)
     try:
         client = yadisk.YaDisk(id=arguments.id, secret=arguments.password, token=arguments.token)
